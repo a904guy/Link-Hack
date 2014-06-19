@@ -2,8 +2,7 @@
 
 /*
 
-   Link-Hack is a HackLang version of Amanpreet Singh's Simple PHP Router
-   (https://github.com/apsdehal)
+   Link-Hack is a Hack Lang HHVM version of Amanpreet Singh's Simple PHP Router (https://github.com/apsdehal)
    
    Author: Andy Hawkins
    Website: (http://a904guy.com)
@@ -18,6 +17,9 @@
    
    Requirements:
    hhvm, [nginx/apache]
+   
+   Tested:
+   Ubuntu 14.04, hhvm 3.2.0-dev+2014.06.18 (rel), nginx 1.4.6
    
    See readme.md for instructions
 
@@ -37,7 +39,7 @@ class Link {
    private static string $method = 'get';
    
    private static $regex = array('~{i}~','~{s}~','~{a}~'); # Can't Vector because of preg_replace
-   private static $replace = array('([\d]+)','([a-zA-Z\+]+)','([\w-\+]+)'); # Can't Vector because of preg_replace
+   private static $replace = array('([\d]+)','([a-zA-Z\+]+)','([\w-\+]+)');
    
    public static function all( Map<Route> $routes ): void
    {
