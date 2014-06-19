@@ -164,6 +164,9 @@ class Link {
                $class->newInstance();
             }
             
+            if(method_exists($class,self::$method))
+               call_user_func_array(array($class,self::$method),$v);
+            
          }catch(Exception $e){
             error_log(var_export($e,true));
             self::handle500();
