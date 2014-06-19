@@ -63,18 +63,17 @@ class Link {
             break;
          }
          
-         $routePath = preg_replace(self::$regex,
-                                   self::$replace,
-                                   $path );
-         
          /* Dynamic Routes */
-         if($routePath !== $path)
+         if($routePath = preg_replace(self::$regex,
+                                   self::$replace,
+                                   $path ) !== $path)
          {
             if( preg_match( '~^/?' . $routePath . '/?$~', self::$path, $matches ) )
             {
                unset($matches['0']);
                $route[array_keys($route)['0']] = $matches;
                self::IterateRoutes($route);
+               break;
             }
          }
       }
