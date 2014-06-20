@@ -39,7 +39,7 @@ class Link {
    private static string $method = 'get';
    
    private static $regex = array('~{i}~','~{s}~','~{a}~'); # Can't Vector because of preg_replace
-   private static $replace = array('([\d]+)','([a-zA-Z\+]+)','([\w-\+]+)');
+   private static $replace = array('([\d]+)','([a-zA-Z]+)','([\w-]+)');
    
    public static function all( Map<Route> $routes ): void
    {
@@ -50,7 +50,7 @@ class Link {
       
       self::$method = strtolower($_SERVER['REQUEST_METHOD']);
       
-      self::$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+      self::$path = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
       
       /* All Routes */
       foreach(self::$routes as $path => $route)
@@ -63,10 +63,11 @@ class Link {
             break;
          }
          
-         /* Dynamic Routes */
-         if($routePath = preg_replace(self::$regex,
+         /* Static Dynamic Routes */
+         $routePath = preg_replace(self::$regex,
                                    self::$replace,
-                                   $path ) !== $path)
+                                   $path );
+         if($routePath !== $path)
          {
             if( preg_match( '~^/?' . $routePath . '/?$~', self::$path, $matches ) )
             {
@@ -76,9 +77,30 @@ class Link {
                break;
             }
          }
+         
+         /* Pure Regex Routes*/
+         if( strpos($path,'(') !== False &&
+             preg_match( '~^'.$path.'$~', self::$path, $matches)
+            ) # Has matching regex syntax
+         {
+            if( preg_match( '~^'.$path.'$~', self::$path, $matches) )
+            {
+               unset($matches['0']);
+               $route[array_keys($route)['0']] = $matches;
+               self::IterateRoutes($route);
+               break;
+            }
+         }
+         
       }
       
       self::IterateRoutes(self::$afterFuncs);
+   }
+   
+   public static function addRegex( string $match, string $regex ): void
+   {
+      self::$regex[] = $match;
+      self::$replace[] = $regex;
    }
    
    public static function before( Route $r ): void
@@ -155,14 +177,14 @@ class Link {
          try
          {
             
-            $class = new ReflectionClass($k);
+            $name = new ReflectionClass($k);
             if(isset($v))
             {
-               $class->newInstanceArgs($v);  
+               $class = $name->newInstanceArgs($v);  
             }else{
-               $class->newInstance();
+               $class = $name->newInstance();
             }
-            
+            # Check for RESTful methods in class
             if(method_exists($class,self::$method))
                call_user_func_array(array($class,self::$method),$v);
             
