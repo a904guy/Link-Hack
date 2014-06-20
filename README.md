@@ -1,5 +1,5 @@
-#Link-Hack
-A __minimal__ router for your php webapps and APIs that effortlessly links all your project. Its fast and to the point.
+## Link-Hack is a __Hack Lang HHVM version__ of Amanpreet Singh's __minimal__ PHP Router https://github.com/apsdehal/Link
+A __minimal__ router for your webapps and APIs that effortlessly links all of your project. Its fast and to the point.
 
 #Features
 - RESTful routing
@@ -24,6 +24,8 @@ http://wiki.nginx.org/Install
 ```php
 	require("Link-Hack/src/Link.hh");
 ```
+
+### Composer Coming Soon
 
 # Config
 
@@ -80,7 +82,8 @@ In Link-Hack routes can be named and then further used generating links in a sim
 
 ```php
 
-function nameMe(){
+function nameMe() :void
+{
 	echo 'I am named';
 }
 
