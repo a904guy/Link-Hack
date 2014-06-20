@@ -262,7 +262,7 @@ function errorFound() :void
 
 function mainPage() :void
 {
-	
+	throw new Exception('Meh? :(');
 }
 
 Link::all( Map{
