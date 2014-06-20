@@ -39,7 +39,7 @@ class Link {
    private static string $method = 'get';
    
    private static $regex = array('~{i}~','~{s}~','~{a}~'); # Can't Vector because of preg_replace
-   private static $replace = array('([\d]+)','([a-zA-Z]+)','([\w-]+)');
+   private static $replace = array('([\d]+)','([ a-zA-Z\+]+)','([\w-\+ ]+)');
    
    public static function all( Map<Route> $routes ): void
    {
@@ -64,17 +64,20 @@ class Link {
          }
          
          /* Static Dynamic Routes */
-         $routePath = preg_replace(self::$regex,
-                                   self::$replace,
-                                   $path );
-         if($routePath !== $path)
+         if(strpos($path,'{') !== False)
          {
-            if( preg_match( '~^/?' . $routePath . '/?$~', self::$path, $matches ) )
+            $routePath = preg_replace(self::$regex,
+                                      self::$replace,
+                                      $path );
+            if($routePath !== $path)
             {
-               unset($matches['0']);
-               $route[array_keys($route)['0']] = $matches;
-               self::IterateRoutes($route);
-               break;
+               if( preg_match( '~^/?' . $routePath . '/?$~', self::$path, $matches ) )
+               {
+                  unset($matches['0']);
+                  $route[array_keys($route)['0']] = $matches;
+                  self::IterateRoutes($route);
+                  break;
+               }
             }
          }
          
@@ -120,6 +123,7 @@ class Link {
       {
          foreach(array_keys($route) as $route_name)
          {
+            if($route_name !== $name) continue;
             $href = $path;
             for( $i = 0; $i < count($params); $i++)
             {
