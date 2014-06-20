@@ -153,9 +153,11 @@ Link::all( Map{
 });
 ```
 
-## Statically Dynamic Routes
+# Dynamic Routes
 
-Link-Hack supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively and of course it can render regex also. Example will clear away your doubts
+## Regex Shorthands
+
+Link-Hack supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively.
 
 ```php
 $routes = Map{
@@ -168,7 +170,7 @@ $routes = Map{
 Link::all($routes);
 ```
 
-## Regex Dynamic Routes
+## Pure Regex
 
 Link-Hack supports writing your own regex based routes.
 
@@ -182,7 +184,7 @@ Link::all($routes);
 
 ## Supplementary Handlers
 
-Through Link-Hack, universal before and after handlers can be added, such that these are executed always before any route is routed. This can be done as follows:
+Through Link-Hack, universal before and after handlers can be added, such that these are executed always before and after any route is routed. This can be done as follows:
 
 ```php
 
@@ -276,4 +278,5 @@ Link::all( Map{
 ```
 
 # License
-Hasn't been defined yet but will follow shortly.
+## Creative Commons Attribution-ShareAlike 3.0 Unported
+http://creativecommons.org/licenses/by-sa/3.0/
