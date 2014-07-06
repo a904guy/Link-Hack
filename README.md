@@ -50,7 +50,7 @@ server {
         fastcgi_pass   127.0.0.1:9000; #Whatever HHVM daemon is set to run on.
         # or if you used a unix socket
         # fastcgi_pass   unix:/var/run/hhvm/hhvm.sock;
-        fastcgi_index  Link.hh;
+        fastcgi_index  YourRouter.hh;
         fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include        fastcgi_params;
 
