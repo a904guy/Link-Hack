@@ -40,7 +40,7 @@ server {
 
 	if (!-e $request_filename)
 	{
-	        rewrite ^/(.*)$ /Link_Debug.hh?/$1 last;
+	        rewrite ^/(.*)$ /YourRouter.hh?/$1 last;
         	break;
 	}
 
