@@ -2,7 +2,7 @@
 
 /*
 
-   Link-Hack is a Hack Lang HHVM version of Amanpreet Singh's Simple PHP Router (https://github.com/apsdehal)
+   Link-Hack is a Hack Lang HHVM version of Amanpreet Singh's minimal PHP Router (https://github.com/apsdehal)
    
    Author: Andy Hawkins
    Website: (http://a904guy.com)
@@ -21,7 +21,7 @@
    Tested:
    Ubuntu 14.04, hhvm 3.2.0-dev+2014.06.18 (rel), nginx 1.4.6
    
-   See readme.md for instructions
+   See README.md for instructions
 
 */
 
@@ -38,10 +38,10 @@ class Link {
    private static string $path = '/';
    private static string $method = 'get';
    
-   private static $regex = array('~{i}~','~{s}~','~{a}~'); # Can't Vector because of preg_replace
-   private static $replace = array('([\d]+)','([ a-zA-Z\+]+)','([\w-\+ ]+)');
+   private static array $regex = array('~{i}~','~{s}~','~{a}~'); # Can't Vector because of preg_replace
+   private static array $replace = array('([\d]+)','([ a-zA-Z\+]+)','([\w-\+ ]+)');
    
-   public static function all( Map<Route> $routes ): void
+   public static function all( Route $routes ): void
    {
       
       self::IterateRoutes(self::$beforeFuncs);
@@ -147,15 +147,15 @@ class Link {
    }
    
    public static function handle404(): void {
-         if( isset ( self::$routes['404'] ) )
-            self::IterateRoutes( self::$routes['404'] );
+         if( self::$routes.contains('404') )
+            self::IterateRoutes( Route('404',self::$routes.get('404')) );
          else
             header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); 
    }
    
    public static function handle500(): void {
-         if( isset ( self::$routes['500'] ) )
-            self::IterateRoutes( self::$routes['500'] );
+         if( self::$routes.contains('500') )
+            self::IterateRoutes( Route('500',self::$routes.get('500')) );
          else
             header($_SERVER["SERVER_PROTOCOL"]." 500 Server Error"); 
    }
@@ -174,7 +174,7 @@ class Link {
       }
    }
    
-   private static function launch_class(string $k, ?mixed $v): void
+   private static function launch_class(string $k, mixed $v): void
    {
       if( class_exists( $k ) )
       {
@@ -199,12 +199,11 @@ class Link {
       }
    }
    
-   private static function launch_function(string $k, ?mixed $v): void
+   private static function launch_function(string $k, mixed $v): void
    {
       try
       {
-         
-         if( function_exists( $k ) && isset( $v ) )
+         if( function_exists( $k ) && is_array( $v ) )
          {
             call_user_func_array( $k , $v );
          }elseif( function_exists( $k ) )
