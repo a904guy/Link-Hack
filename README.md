@@ -99,7 +99,7 @@ Names to routes must be given as second argument in array while the first being 
 These named routes can be used in creating in hassle free links.
 
 ```html
-	<a href="<?php echo Link::route('Its my name') ?>">Go to named route</a>
+	<a href="<?hh echo Link::route('Its my name') ?>">Go to named route</a>
 ```
 
 ## Routing with classes
@@ -193,7 +193,7 @@ function universalBeforeHandler( $id ) :void
     echo 'Hello I occurred before with ' . $id . '\n';
 }
 
-function universalAfterHandler( $id ) :void
+function universalAfterHandler( ?$id ) :void
 {
     if( $id )
         echo 'Hello I occurred after with ' . $id;
@@ -207,7 +207,7 @@ function main() :void
 }
 
 Link::before( Map{'universalBeforeHandler'=>array('12')} ); //If you want to pass parameters to them, pass them as arrays
-Link::before( Map{'universalBeforeHandler'=>False} ); //else just don't specify them.
+Link::after( Map{'universalAfterHandler'=>False} ); //else just don't specify them.
 
 Link::all( Map{
     '/' => Map{'main'=>False}
