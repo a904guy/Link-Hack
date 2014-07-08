@@ -86,13 +86,10 @@ class Link {
              preg_match( '~^'.$path.'$~', self::$path, $matches)
             ) # Has matching regex syntax
          {
-            if( preg_match( '~^'.$path.'$~', self::$path, $matches) )
-            {
-               unset($matches['0']);
-               $route[array_keys($route)['0']] = $matches;
-               self::IterateRoutes($route);
-               break;
-            }
+            unset($matches['0']);
+            $route[array_keys($route)['0']] = $matches;
+            self::IterateRoutes($route);
+            break;
          }
          
       }
