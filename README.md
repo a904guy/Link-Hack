@@ -71,7 +71,7 @@ function routeMe(): void
 }
 
 Link::all( Map{
-	'/' => Map{'routeMe'=>False}
+	'/' => Map{'routeMe' => []}
 });
 ```
 
@@ -88,7 +88,7 @@ function nameMe() :void
 }
 
 Link::all( Map{
-	'/named' => Map{'nameMe'=>False, 'Its my name'=>False}
+	'/named' => Map{'nameMe' => [], 'Its my name' => []}
 });
 ```
 
@@ -109,9 +109,9 @@ Link can handle classes as Route handler easily, but remember non-static class w
 ```php
 
 $routes = Map{
-	'/' => Map{'IndexController::getMeHome'=>False}, //Static function
-	'/home' =>  Map{'HomeController'=>False}, //Class
-	'/office' =>  Map{'OfficeController'=>False} // Class
+	'/' => Map{'IndexController::getMeHome' => []}, // Static function
+	'/home' =>  Map{'HomeController' => []}, // Class
+	'/office' =>  Map{'OfficeController' => []} // Class
 });
 
 Link::all($routes);
@@ -149,7 +149,7 @@ class HomeController
 }
 
 Link::all( Map{
-	'/' => Map{'HomeController'=>False, 'HomeRoute'=>False}
+	'/' => Map{'HomeController' => [], 'HomeRoute' => []}
 });
 ```
 
@@ -161,10 +161,10 @@ Link-Hack supports numbers, string and alphanumeric wildcards which can be used 
 
 ```php
 $routes = Map{
-	'/' => Map{'IndexController'=>False},
-	'/{i}' => Map{'IndexController'=>False},
-		//Parameter in place of {i} will be passed to IndexController
-	'/posts/{a}/{i}/{s}' => Map{'PostsController'=>False}
+	'/' => Map{'IndexController' => []},
+	'/{i}' => Map{'IndexController' => []},
+		// Parameter in place of {i} will be passed to IndexController
+	'/posts/{a}/{i}/{s}' => Map{'PostsController' => []}
 };
 
 Link::all($routes);
@@ -176,7 +176,7 @@ Link-Hack supports writing your own regex based routes.
 
 ```php
 $routes = Map{
-	'/regex/([\d]+)/([a-zA-Z]+)/([a-zA-Z]+)' => Map{'regexController'=>False}
+	'/regex/([\d]+)/([a-zA-Z]+)/([a-zA-Z]+)' => Map{'regexController' => []}
 };
 
 Link::all($routes);
@@ -206,11 +206,11 @@ function main() :void
     echo 'I simply occurred\n'
 }
 
-Link::before( Map{'universalBeforeHandler'=>array('12')} ); //If you want to pass parameters to them, pass them as arrays
-Link::after( Map{'universalAfterHandler'=>False} ); //else just don't specify them.
+Link::before( Map{'universalBeforeHandler' => array('12')} ); // If you want to pass parameters to them, pass them as arrays
+Link::after( Map{'universalAfterHandler' => []} ); // else just don't specify them.
 
 Link::all( Map{
-    '/' => Map{'main'=>False}
+    '/' => Map{'main' => []}
 })
 ```
 
@@ -236,7 +236,7 @@ function nameMe( $i, $s ) :void
 }
 
 Link::all( Map{
-	'/named/{i}/{s}' => Map{'nameMe'=>False, 'Its my name'=>False}
+	'/named/{i}/{s}' => Map{'nameMe' => [], 'Its my name' => []}
 });
 ```
 
@@ -271,9 +271,9 @@ function mainPage() :void
 }
 
 Link::all( Map{
-	'/' => Map{'mainPage'=>False},
-	'404' => Map{'notFound'=>False},
-	'500' => Map{'errorFound'=>False}
+	'/' => Map{'mainPage' => []},
+	'404' => Map{'notFound' => []},
+	'500' => Map{'errorFound' => []}
 });
 ```
 
