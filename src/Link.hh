@@ -108,7 +108,7 @@ class Link {
                 }
             }
         }
-        return $href;
+        return (string) $href;
     }
 
     private static function assignFunc(Route $r, ?Route $d): Route {
