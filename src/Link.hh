@@ -1,4 +1,4 @@
-<?hh //strict
+<?hh // strict
 
 /*
 
@@ -25,7 +25,7 @@
 
  */
 
-type Route = Map <TFunc, ?Tvars>;
+type Route = Map<TFunc, ?Tvars>;
 
 class Link {
 
