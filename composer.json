@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Link-Hack is a Hack Lang HHVM version of Amanpreet Singh's Simple PHP Router",
     "keywords": ["hhvm", "router"],
-    "homepage": "https://github.com/bmbsqd/Link-Hack",
+    "homepage": "https://github.com/a904guy/Link-Hack",
     "license": "CC-BY-SA",
     "authors": [
         {
