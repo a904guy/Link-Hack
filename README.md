@@ -25,7 +25,11 @@ http://wiki.nginx.org/Install
 	require("Link-Hack/src/Link.hh");
 ```
 
-### Composer Coming Soon
+## Composer
+
+```bash
+	composer require link-hack/router
+```
 
 # Config
 
