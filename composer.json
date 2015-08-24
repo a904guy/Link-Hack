@@ -1,5 +1,5 @@
 {
-    "name": "link/link-hack",
+    "name": "link-hack/router",
     "type": "library",
     "description": "Link-Hack is a Hack Lang HHVM version of Amanpreet Singh's Simple PHP Router",
     "keywords": ["hhvm", "router"],
