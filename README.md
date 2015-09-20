@@ -40,7 +40,7 @@ server {
         listen [::]:80 default_server ipv6only=on;
 
         root /path/Link-Hack/src/; # Changet to path of your environment
-        server_name _;
+        server_name _; #catchall
 
 	if (!-e $request_filename)
 	{
