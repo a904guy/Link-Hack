@@ -63,9 +63,9 @@ server {
 }
 ```
 
-#Basics
+# Basics
 
-##Simple Routing
+## Simple Routing
 
 ```php
 
@@ -79,7 +79,7 @@ Link::all( Map{
 });
 ```
 
-##Named Routing
+## Named Routing
 
 In Link-Hack routes can be named and then further used generating links in a simple and elegant way.
 
@@ -122,7 +122,7 @@ Link::all($routes);
 
 ```
 
-##RESTful routing
+## RESTful routing
 
 RESTful routing is a breeze for Link-Hack.
 
